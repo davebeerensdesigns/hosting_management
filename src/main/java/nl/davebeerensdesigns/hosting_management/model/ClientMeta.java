@@ -1,20 +1,22 @@
 package nl.davebeerensdesigns.hosting_management.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@Data
+@Builder
 @Getter
 @Setter
+@NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 
 @Entity
-@Table(name = "client_meta", uniqueConstraints = @UniqueConstraint(name = "client_meta_key_unique", columnNames = {"meta_key", "client_id"}))
+@Table(name = "client_meta")
 public class ClientMeta {
 
     @Id
@@ -22,25 +24,40 @@ public class ClientMeta {
     @Column(updatable = false)
     private Long id;
 
-    @Column(name = "meta_key")
-    @NotNull(message = "Metakey is mandatory")
-    private String metaKey;
+    @Column(name = "company_name")
+    @NotNull(message = "Company name is mandatory")
+    private String companyName;
 
-    @Column(name = "meta_value")
-    @NotNull(message = "Metavalue is mandatory")
-    private String metaValue;
+    @Column(name = "company_address")
+    @NotNull(message = "Company address is mandatory")
+    private String companyAddress;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "client_id", nullable = false)
-    @JsonIgnore
+    @Column(name = "company_city")
+    @NotNull(message = "Company city is mandatory")
+    private String companyCity;
+
+    @Column(name = "company_state")
+    @NotNull(message = "Company state is mandatory")
+    private String companyState;
+
+    @Column(name = "company_zipcode")
+    @NotNull(message = "Company zipcode is mandatory")
+    private String companyZipcode;
+
+    @Column(name = "company_country")
+    @NotNull(message = "Company country is mandatory")
+    private String companyCountry;
+
+    @Column(name = "company_email")
+    @NotNull(message = "Company email is mandatory")
+    private String companyEmail;
+
+    @Column(name = "company_phone")
+    @NotNull(message = "Company phone is mandatory")
+    private String companyPhone;
+
+    @OneToOne(fetch = FetchType.LAZY)
     @NotNull(message = "Client is mandatory")
+    @JsonIgnore
     private Client client;
-
-    public ClientMeta(){}
-    public ClientMeta(String metaKey, String metaValue, Client client) {
-        this.metaKey = metaKey;
-        this.metaValue = metaValue;
-        this.client = client;
-    }
-
 }

@@ -14,13 +14,11 @@ INSERT INTO client (date_created, date_modified, client_id, client_name)
 VALUES
 (localtimestamp, localtimestamp, 1, 'Client 1');
 
-INSERT INTO client_meta (meta_key, meta_value, client_id)
+INSERT INTO client_meta (company_name, company_address, company_city, company_state, company_zipcode, company_country, company_email, company_phone, client_id)
 VALUES
-('_client_meta_phone', '0612345678', 1),
-('_client_meta_email', 'user@wappfood.nl', 1),
-('_client_meta_company', 'Wappstars', 1),
-('_client_meta_address', 'hurksestraat 28b', 1),
-('_client_meta_city', 'Eindhoven', 1),
-('_client_meta_state', 'Noord Brabant', 1),
-('_client_meta_postcode', '1234 aa', 1),
-('_client_meta_country', 'Nederland', 1);
+('Wok Ninove', 'Brusselsesteenweg 211-213', 'Meerbeke', 'Oost-Vlaanderen', '9402', 'Belgie', ' 054 33 28 88', 'wokninove@hotmail.com', 1);
+
+INSERT INTO client_website (server_address, client_package, client_domain, ssl_type, ssl_status, ssl_expires, client_id)
+VALUES
+('ns1.wappstarsdns10.nl', 'www.wokninove.be', 'www.wokninove.be', 'PositiveSSL', true, '2023-01-01', 1),
+('ns1.wappstarsdns10.nl', 'www.wokninove.be', 'bestellen.wokninove.be', 'PositiveSSL', true, '2023-01-01', 1);

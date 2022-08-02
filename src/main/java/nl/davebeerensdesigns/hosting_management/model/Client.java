@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.hateoas.RepresentationModel;
@@ -11,8 +12,8 @@ import org.springframework.hateoas.RepresentationModel;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -22,7 +23,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "client")
-public class Client  extends RepresentationModel<Client> {
+public class Client extends RepresentationModel<Client> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,33 +45,11 @@ public class Client  extends RepresentationModel<Client> {
     @NotNull(message = "Client name is mandatory")
     private String clientName;
 
+    @OneToOne(mappedBy = "client")
+    @JsonIgnore
+    private ClientMeta clientMeta;
+
     @OneToMany(mappedBy = "client")
-    private Set<ClientMeta> clientMetas;
-
-    public Map<String, String> getClientMetaData(){
-        Map<String, String> metaDataMap = new HashMap<>();
-        if(clientMetas != null) {
-            for (ClientMeta metaData : clientMetas) {
-                switch (metaData.getMetaKey()) {
-                    case "_client_meta_phone" -> metaDataMap.put("phone", metaData.getMetaValue());
-                    case "_client_meta_email" -> metaDataMap.put("email", metaData.getMetaValue());
-                    case "_client_meta_company" -> metaDataMap.put("company", metaData.getMetaValue());
-                    case "_client_meta_address" -> metaDataMap.put("address", metaData.getMetaValue());
-                    case "_client_meta_city" -> metaDataMap.put("city", metaData.getMetaValue());
-                    case "_client_meta_state" -> metaDataMap.put("state", metaData.getMetaValue());
-                    case "_client_meta_postcode" -> metaDataMap.put("postcode", metaData.getMetaValue());
-                    case "_client_meta_country" -> metaDataMap.put("country", metaData.getMetaValue());
-                }
-            }
-        }
-        return metaDataMap;
-    }
-
-    public Set<ClientMeta> getClientMetas() { return clientMetas; }
-    public void addClientMeta(ClientMeta clientMeta) {
-        this.clientMetas.add(clientMeta);
-    }
-    public void removeClientMeta(ClientMeta clientMeta) {
-        this.clientMetas.remove(clientMeta);
-    }
+    @JsonIgnore
+    private List<ClientWebsite> clientWebsite;
 }

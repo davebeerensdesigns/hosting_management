@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Authority implements Serializable {
 
     @Id
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50, updatable = false)
     private String username;
 
     @Id

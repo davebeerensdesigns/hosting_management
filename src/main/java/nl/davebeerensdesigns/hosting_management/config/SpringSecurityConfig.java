@@ -75,6 +75,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Public endpoints
                 .antMatchers(HttpMethod.POST,"/wp-json/hm/v1/authenticate").permitAll()
                 .antMatchers(HttpMethod.GET,"/wp-json/hm/v1/authenticated").permitAll()
+                .antMatchers(HttpMethod.GET,"/wp-json/hm/v1/clients").permitAll()
+                .antMatchers(HttpMethod.GET,"/wp-json/hm/v1/clients/**").permitAll()
                 // Private endpoints
                 .antMatchers(HttpMethod.GET,"/wp-json/hm/v1/authenticated").authenticated()
                 .antMatchers("/wp-json/hm/v1/users/*/authorities").hasRole("ADMIN")

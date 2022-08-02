@@ -12,7 +12,6 @@ import lombok.*;
 public class ClientMetaInputDto {
 
     private Long clientId;
-    private Long clientName;
     private String company;
     private String address;
     private String city;

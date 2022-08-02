@@ -3,11 +3,13 @@ package nl.davebeerensdesigns.hosting_management.dto;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import nl.davebeerensdesigns.hosting_management.model.ClientMeta;
+import nl.davebeerensdesigns.hosting_management.model.ClientWebsite;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
 import java.time.Instant;
-import java.util.Map;
+import java.util.*;
 
 @Builder
 @Getter
@@ -20,5 +22,6 @@ public class ClientDto extends RepresentationModel<ClientDto> {
     private final Instant dateModified;
     private final Long clientId;
     private final String clientName;
-    private final Map<String, String> clientMetaData;
+    private final ClientMeta clientMeta;
+    private final List<ClientWebsite> clientWebsite;
 }

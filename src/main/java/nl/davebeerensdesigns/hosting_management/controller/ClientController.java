@@ -7,6 +7,7 @@ import nl.davebeerensdesigns.hosting_management.dto.ClientDto;
 import nl.davebeerensdesigns.hosting_management.dto.ClientInputDto;
 import nl.davebeerensdesigns.hosting_management.model.Client;
 import nl.davebeerensdesigns.hosting_management.model.ClientMeta;
+import nl.davebeerensdesigns.hosting_management.model.ClientWebsite;
 import nl.davebeerensdesigns.hosting_management.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -79,13 +79,5 @@ public class ClientController {
     public ResponseEntity<?> deleteClient(@PathVariable("id") Long id) {
         clientService.deleteClient(id);
         return ResponseEntity.noContent().build();
-    }
-
-
-
-    @GetMapping("/{id}/metadata")
-    public ResponseEntity<Object> getClientMetas(@PathVariable("id") Long id)  {
-        List<ClientMeta> clientMetas = clientService.getClientMetas(id);
-        return ResponseEntity.ok().body(clientMetas);
     }
 }
