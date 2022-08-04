@@ -4,12 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ValidMetaData {
-    public static boolean isValidMetaKey(String metakey) {
-        String regex = "^[a-zA-Z_]+$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(metakey);
-        return matcher.matches();
-    }
     public static boolean isValidEmail(String email) {
         String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
         Pattern pattern = Pattern.compile(regex);
@@ -31,7 +25,7 @@ public class ValidMetaData {
         return matcher.matches();
     }
     public static boolean isValidAddress(String address) {
-        String regex = "^(?=.*[0-9 ])(?=.*[a-zA-Z ])([a-zA-Z0-9 ]+)$";
+        String regex = "^([1-9][e][\\s])*([a-zA-Z]+(([\\.][\\s])|([\\s]))?)+[1-9][0-9]*(([-][1-9][0-9]*)|([\\s]?[a-zA-Z]+))?$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(address);
         return matcher.matches();
@@ -48,7 +42,7 @@ public class ValidMetaData {
         Matcher matcher = pattern.matcher(state);
         return matcher.matches();
     }
-    public static boolean isValidPostcode(String postcode) {
+    public static boolean isValidZipcode(String postcode) {
         String regex = "^[a-zA-Z0-9 -]*$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(postcode);

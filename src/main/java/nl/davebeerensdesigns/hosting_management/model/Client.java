@@ -45,7 +45,8 @@ public class Client extends RepresentationModel<Client> {
     @NotNull(message = "Client name is mandatory")
     private String clientName;
 
-    @OneToOne(mappedBy = "client")
+    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     @JsonIgnore
     private ClientMeta clientMeta;
 

@@ -56,8 +56,9 @@ public class ClientMeta {
     @NotNull(message = "Company phone is mandatory")
     private String companyPhone;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @NotNull(message = "Client is mandatory")
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "client_id")
     @JsonIgnore
     private Client client;
 }

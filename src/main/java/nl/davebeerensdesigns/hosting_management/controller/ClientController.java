@@ -5,6 +5,8 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import nl.davebeerensdesigns.hosting_management.assembler.ClientDtoAssembler;
 import nl.davebeerensdesigns.hosting_management.dto.ClientDto;
 import nl.davebeerensdesigns.hosting_management.dto.ClientInputDto;
+import nl.davebeerensdesigns.hosting_management.dto.ClientMetaDto;
+import nl.davebeerensdesigns.hosting_management.dto.ClientMetaInputDto;
 import nl.davebeerensdesigns.hosting_management.model.Client;
 import nl.davebeerensdesigns.hosting_management.model.ClientMeta;
 import nl.davebeerensdesigns.hosting_management.model.ClientWebsite;
@@ -79,5 +81,23 @@ public class ClientController {
     public ResponseEntity<?> deleteClient(@PathVariable("id") Long id) {
         clientService.deleteClient(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping(value = "/{clientId}/metadata")
+    public ResponseEntity<?> addClientMeta(@PathVariable("clientId") Long id, @RequestBody @Valid ClientMetaInputDto dto) {
+        Client newClientMeta = clientService.addClientMeta(id, dto);
+        ClientDto clientDto = clientDtoAssembler.toModel(newClientMeta)
+                .add(linkTo(methodOn(ClientController.class).getClients()).withRel("clients"));
+
+        return ResponseEntity.ok(clientDto);
+    }
+
+    @PutMapping(value = "/{clientId}/metadata")
+    public ResponseEntity<?> updateClientMeta(@PathVariable("clientId") Long id, @RequestBody @Valid ClientMetaInputDto dto) {
+        Client newClientMeta = clientService.updateClientMeta(id, dto);
+        ClientDto clientDto = clientDtoAssembler.toModel(newClientMeta)
+                .add(linkTo(methodOn(ClientController.class).getClients()).withRel("clients"));
+
+        return ResponseEntity.ok(clientDto);
     }
 }

@@ -16,7 +16,7 @@ VALUES
 
 INSERT INTO client_meta (company_name, company_address, company_city, company_state, company_zipcode, company_country, company_email, company_phone, client_id)
 VALUES
-('Wok Ninove', 'Brusselsesteenweg 211-213', 'Meerbeke', 'Oost-Vlaanderen', '9402', 'Belgie', ' 054 33 28 88', 'wokninove@hotmail.com', 1);
+('Wok Ninove', 'Brusselsesteenweg 211-213', 'Meerbeke', 'Oost-Vlaanderen', '9402', 'Belgie', 'wokninove@hotmail.com', ' 054 33 28 88', 1);
 
 INSERT INTO client_website (server_address, client_package, client_domain, ssl_type, ssl_status, ssl_expires, client_id)
 VALUES
